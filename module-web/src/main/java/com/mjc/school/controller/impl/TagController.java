@@ -25,35 +25,41 @@ public class TagController implements BaseControllers<TagDtoRequest, TagDtoRespo
 
     @Override
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<TagDtoResponse> create(@RequestBody TagDtoRequest request) {
         return new ResponseEntity<>(this.tagService.create(request), HttpStatus.CREATED);
     }
 
     @Override
     @GetMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<TagDtoResponse> readById(@PathVariable Long id) {
         return new ResponseEntity<>(this.tagService.readById(id),HttpStatus.OK);
     }
 
     @Override
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<TagDtoResponse>> readAll() {
         return new ResponseEntity<>(this.tagService.readAll(),HttpStatus.OK);
     }
 
     @Override
-    @PutMapping
-    public ResponseEntity<TagDtoResponse> update(@RequestBody TagDtoRequest request) {
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<TagDtoResponse> update(@PathVariable Long id, @RequestBody TagDtoRequest request) {
         return new ResponseEntity<>(this.tagService.update(request),HttpStatus.OK);
     }
 
     @Override
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Boolean> deleteById(@PathVariable Long id) {
-        return new ResponseEntity<>(this.tagService.deleteById(id),HttpStatus.NO_CONTENT);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        this.tagService.deleteById(id);
     }
 
     @GetMapping(value = "?news=newsId")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<TagDtoResponse>> getTagByNewsId(@PathVariable Long id) {
         return new ResponseEntity<>(this.tagService.getTagsByNewsId(id),HttpStatus.OK);
     }

@@ -25,35 +25,41 @@ public class NewsController implements BaseControllers<NewsDtoRequest, NewsDtoRe
 
     @Override
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<NewsDtoResponse> create(@RequestBody NewsDtoRequest request) {
         return new ResponseEntity<>(this.newsService.create(request), HttpStatus.CREATED);
     }
 
     @Override
     @GetMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<NewsDtoResponse> readById(@PathVariable Long id) {
         return new ResponseEntity<>(this.newsService.readById(id),HttpStatus.OK);
     }
 
     @Override
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<NewsDtoResponse>> readAll() {
         return new ResponseEntity<>(this.newsService.readAll(),HttpStatus.OK);
     }
 
     @Override
-    @PutMapping
-    public ResponseEntity<NewsDtoResponse> update(@RequestBody NewsDtoRequest request) {
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<NewsDtoResponse> update(@PathVariable Long id, @RequestBody NewsDtoRequest request) {
         return new ResponseEntity<>(this.newsService.update(request),HttpStatus.OK);
     }
 
     @Override
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Boolean> deleteById(@PathVariable Long id) {
-        return new ResponseEntity<>(this.newsService.deleteById(id),HttpStatus.NO_CONTENT);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        this.newsService.deleteById(id);
     }
 
     @GetMapping("/name")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<NewsDtoResponse>> getNewsByTagNames(@RequestParam(name = "name") List<String> tagNames, List<Long> tagIds, String authorName, String title, String content) {
         return new ResponseEntity<>(this.newsService.getNewsByCriteria(tagNames, tagIds, authorName, title, content),HttpStatus.OK);
     }

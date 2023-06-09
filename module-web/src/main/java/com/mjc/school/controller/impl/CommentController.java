@@ -25,35 +25,41 @@ public class CommentController implements BaseControllers<CommentDtoRequest, Com
 
     @Override
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<CommentDtoResponse> create(@RequestBody CommentDtoRequest request) {
         return new ResponseEntity<>(this.commentService.create(request), HttpStatus.CREATED);
     }
 
     @Override
     @GetMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<CommentDtoResponse> readById(@PathVariable Long id) {
         return new ResponseEntity<>(this.commentService.readById(id),HttpStatus.OK);
     }
 
     @Override
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<CommentDtoResponse>> readAll() {
         return new ResponseEntity<>(this.commentService.readAll(),HttpStatus.OK);
     }
 
     @Override
-    @PutMapping
-    public ResponseEntity<CommentDtoResponse> update(@RequestBody CommentDtoRequest request) {
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<CommentDtoResponse> update(@PathVariable Long id, @RequestBody CommentDtoRequest request) {
         return new ResponseEntity<>(this.commentService.update(request),HttpStatus.OK);
     }
 
     @Override
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Boolean> deleteById(@PathVariable Long id) {
-        return new ResponseEntity<>(this.commentService.deleteById(id),HttpStatus.NO_CONTENT);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) {
+        this.commentService.deleteById(id);
     }
 
     @GetMapping(value = "?news=newsId")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<CommentDtoResponse>> getCommentsByNewsId(@PathVariable Long id) {
         return new ResponseEntity<>(this.commentService.getTagsByNewsId(id),HttpStatus.OK);
     }
