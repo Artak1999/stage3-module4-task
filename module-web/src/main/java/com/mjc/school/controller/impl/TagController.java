@@ -1,6 +1,6 @@
-package com.mjc.school.implementation;
+package com.mjc.school.controller.impl;
 
-import com.mjc.school.BaseControllers;
+import com.mjc.school.controller.BaseControllers;
 import com.mjc.school.dto.TagDtoRequest;
 import com.mjc.school.dto.TagDtoResponse;
 import com.mjc.school.services.TagService;

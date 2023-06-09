@@ -1,4 +1,4 @@
-package com.mjc.school;
+package com.mjc.school.controller;
 
 import org.springframework.http.ResponseEntity;
 
