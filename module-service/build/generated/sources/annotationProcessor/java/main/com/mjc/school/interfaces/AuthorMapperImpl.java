@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-09T17:17:39+0400",
+    date = "2023-06-09T21:01:15+0400",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.jar, environment: Java 17.0.6 (JetBrains s.r.o.)"
 )
 @Component
@@ -24,7 +24,6 @@ public class AuthorMapperImpl implements AuthorMapper {
 
         AuthorModel authorModel = new AuthorModel();
 
-        authorModel.setId( dto.getId() );
         authorModel.setName( dto.getName() );
 
         return authorModel;

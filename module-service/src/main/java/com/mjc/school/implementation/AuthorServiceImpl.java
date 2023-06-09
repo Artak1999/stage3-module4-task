@@ -56,7 +56,6 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
         validator.validateAuthorRequest(updateRequest);
-        authorExistsOrThrowException(updateRequest.getId());
         AuthorModel updatedAuthor = authorRepository.update(authorMapper.dtoRequestToModel(updateRequest));
         return authorMapper.modelToDtoResponse(updatedAuthor);
     }
