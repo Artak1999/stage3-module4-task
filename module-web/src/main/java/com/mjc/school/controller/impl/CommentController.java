@@ -6,7 +6,6 @@ import com.mjc.school.dto.CommentDtoResponse;
 import com.mjc.school.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,29 +25,29 @@ public class CommentController implements BaseControllers<CommentDtoRequest, Com
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<CommentDtoResponse> create(@RequestBody CommentDtoRequest request) {
-        return new ResponseEntity<>(this.commentService.create(request), HttpStatus.CREATED);
+    public CommentDtoResponse create(@RequestBody CommentDtoRequest request) {
+        return this.commentService.create(request);
     }
 
     @Override
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<CommentDtoResponse> readById(@PathVariable Long id) {
-        return new ResponseEntity<>(this.commentService.readById(id),HttpStatus.OK);
+    public CommentDtoResponse readById(@PathVariable Long id) {
+        return this.commentService.readById(id);
     }
 
     @Override
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<CommentDtoResponse>> readAll() {
-        return new ResponseEntity<>(this.commentService.readAll(),HttpStatus.OK);
+    public List<CommentDtoResponse> readAll(@RequestParam int size, @RequestParam int page, @RequestParam String sort) {
+        return this.commentService.readAll(size, page, sort);
     }
 
     @Override
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<CommentDtoResponse> update(@PathVariable Long id, @RequestBody CommentDtoRequest request) {
-        return new ResponseEntity<>(this.commentService.update(request),HttpStatus.OK);
+    public CommentDtoResponse update(@PathVariable Long id, @RequestBody CommentDtoRequest request) {
+        return this.commentService.update(request);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class CommentController implements BaseControllers<CommentDtoRequest, Com
 
     @GetMapping(value = "?news=newsId")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<CommentDtoResponse>> getCommentsByNewsId(@PathVariable Long id) {
-        return new ResponseEntity<>(this.commentService.getTagsByNewsId(id),HttpStatus.OK);
+    public List<CommentDtoResponse> getCommentsByNewsId(@PathVariable Long id) {
+        return this.commentService.getTagsByNewsId(id);
     }
 }

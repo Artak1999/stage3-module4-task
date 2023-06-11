@@ -16,7 +16,7 @@ public class CommentRepository implements BaseRepository<CommentModel,Long> {
 
     @Override
     @SuppressWarnings({"unchecked"})
-    public List<CommentModel> readAll() {
+    public List<CommentModel> readAll(int size, int page, String sort) {
         return entityManager.createQuery("Select a From CommentModel a").getResultList();
     }
 

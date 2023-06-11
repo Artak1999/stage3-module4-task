@@ -3,7 +3,7 @@ package com.mjc.school;
 import java.util.List;
 
 public interface BaseService<T, R, K> {
-    List<R> readAll();
+    List<R> readAll(int size, int page, String sort);
 
     R readById(K id);
 

@@ -7,7 +7,7 @@ import com.mjc.school.dto.NewsDtoResponse;
 import java.util.List;
 
 public interface NewsService extends BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
-    List<NewsDtoResponse> getNewsByCriteria(List<String> tagNames, List<Long> tagIds, String authorName, String title, String content);
+    List<NewsDtoResponse> getNewsByCriteria(List<String> tagNames, List<Long> tagIds, String authorName, String title, String content, int size, int page, String sort);
 
     NewsModel dtoRequestToModel(NewsDtoRequest dto);
 

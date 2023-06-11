@@ -33,8 +33,8 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public List<CommentDtoResponse> readAll() {
-        return commentMapper.listOfModelsToListOfResponses(commentRepository.readAll());
+    public List<CommentDtoResponse> readAll(int size, int page, String sort) {
+        return commentMapper.listOfModelsToListOfResponses(commentRepository.readAll(size, page, sort));
     }
 
     @Override

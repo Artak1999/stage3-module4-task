@@ -36,8 +36,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<TagDtoResponse> readAll() {
-        return tagMapper.listOfModelsToListOfResponses(tagRepository.readAll());
+    public List<TagDtoResponse> readAll(int size, int page, String sort) {
+        return tagMapper.listOfModelsToListOfResponses(tagRepository.readAll(size, page, sort));
     }
 
     @Override

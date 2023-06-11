@@ -19,7 +19,7 @@ public class AuthorRepository implements BaseRepository<AuthorModel,Long> {
 
     @Override
     @SuppressWarnings({"unchecked"})
-    public List<AuthorModel> readAll() {
+    public List<AuthorModel> readAll(int size, int page, String sort) {
         return entityManager.createQuery("Select a From AuthorModel a").getResultList();
     }
 

@@ -16,7 +16,7 @@ public class TagRepository implements BaseRepository<TagModel,Long> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<TagModel> readAll() {
+    public List<TagModel> readAll(int size, int page, String sort) {
         return entityManager.createQuery("Select a From TagModel a").getResultList();
     }
 

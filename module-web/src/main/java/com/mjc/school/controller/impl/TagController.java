@@ -6,7 +6,6 @@ import com.mjc.school.dto.TagDtoResponse;
 import com.mjc.school.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,29 +25,29 @@ public class TagController implements BaseControllers<TagDtoRequest, TagDtoRespo
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<TagDtoResponse> create(@RequestBody TagDtoRequest request) {
-        return new ResponseEntity<>(this.tagService.create(request), HttpStatus.CREATED);
+    public TagDtoResponse create(@RequestBody TagDtoRequest request) {
+        return this.tagService.create(request);
     }
 
     @Override
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<TagDtoResponse> readById(@PathVariable Long id) {
-        return new ResponseEntity<>(this.tagService.readById(id),HttpStatus.OK);
+    public TagDtoResponse readById(@PathVariable Long id) {
+        return this.tagService.readById(id);
     }
 
     @Override
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<TagDtoResponse>> readAll() {
-        return new ResponseEntity<>(this.tagService.readAll(),HttpStatus.OK);
+    public List<TagDtoResponse> readAll(@RequestParam int size, @RequestParam int page, @RequestParam String sort) {
+        return this.tagService.readAll(size, page, sort);
     }
 
     @Override
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<TagDtoResponse> update(@PathVariable Long id, @RequestBody TagDtoRequest request) {
-        return new ResponseEntity<>(this.tagService.update(request),HttpStatus.OK);
+    public TagDtoResponse update(@PathVariable Long id, @RequestBody TagDtoRequest request) {
+        return this.tagService.update(request);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class TagController implements BaseControllers<TagDtoRequest, TagDtoRespo
 
     @GetMapping(value = "?news=newsId")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<TagDtoResponse>> getTagByNewsId(@PathVariable Long id) {
-        return new ResponseEntity<>(this.tagService.getTagsByNewsId(id),HttpStatus.OK);
+    public List<TagDtoResponse> getTagByNewsId(@PathVariable Long id) {
+        return this.tagService.getTagsByNewsId(id);
     }
 }

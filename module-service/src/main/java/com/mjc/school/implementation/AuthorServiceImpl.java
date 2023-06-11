@@ -34,8 +34,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorDtoResponse> readAll() {
-        return authorMapper.listOfModelsToListOfResponses(authorRepository.readAll());
+    public List<AuthorDtoResponse> readAll(int size, int page, String sort) {
+        return authorMapper.listOfModelsToListOfResponses(authorRepository.readAll(size,page,sort));
     }
 
     @Override

@@ -6,7 +6,6 @@ import com.mjc.school.dto.AuthorDtoResponse;
 import com.mjc.school.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,29 +25,29 @@ public class AuthorController implements BaseControllers<AuthorDtoRequest, Autho
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<AuthorDtoResponse> create(@RequestBody AuthorDtoRequest request) {
-        return new ResponseEntity<>(this.authorService.create(request),HttpStatus.CREATED);
+    public AuthorDtoResponse create(@RequestBody AuthorDtoRequest request) {
+        return this.authorService.create(request);
     }
 
     @Override
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<AuthorDtoResponse> readById(@PathVariable Long id) {
-        return new ResponseEntity<>(this.authorService.readById(id),HttpStatus.OK);
+    public AuthorDtoResponse readById(@PathVariable Long id) {
+        return this.authorService.readById(id);
     }
 
     @Override
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<AuthorDtoResponse>> readAll() {
-        return new ResponseEntity<>(this.authorService.readAll(),HttpStatus.OK);
+    public List<AuthorDtoResponse> readAll(@RequestParam int size, @RequestParam int page, @RequestParam String sort) {
+        return this.authorService.readAll(size, page, sort);
     }
 
     @Override
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<AuthorDtoResponse> update(@PathVariable Long id, @RequestBody AuthorDtoRequest request) {
-        return new ResponseEntity<>(this.authorService.update(request),HttpStatus.OK);
+    public AuthorDtoResponse update(@PathVariable Long id, @RequestBody AuthorDtoRequest request) {
+        return this.authorService.update(request);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class AuthorController implements BaseControllers<AuthorDtoRequest, Autho
 
     @GetMapping(value = "?news=newsId")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<AuthorDtoResponse> getAuthorByNewsId(@PathVariable Long id){
-        return new ResponseEntity<>(this.authorService.getAuthorByNewsId(id),HttpStatus.OK);
+    public AuthorDtoResponse getAuthorByNewsId(@PathVariable Long id){
+        return this.authorService.getAuthorByNewsId(id);
     }
 }

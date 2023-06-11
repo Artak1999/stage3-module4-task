@@ -39,8 +39,8 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<NewsDtoResponse> readAll() {
-        return newsMapper.listOfModelsToListOfResponses(newsRepository.readAll());
+    public List<NewsDtoResponse> readAll(int size, int page, String sort) {
+        return newsMapper.listOfModelsToListOfResponses(newsRepository.readAll(size, page, sort));
     }
 
     @Override
@@ -81,9 +81,12 @@ public class NewsServiceImpl implements NewsService {
                                                    List<Long> tagIds,
                                                    String authorName,
                                                    String title,
-                                                   String content) {
+                                                   String content,
+                                                   int size,
+                                                   int page,
+                                                   String sort) {
         List<NewsModel> newsModels = newsRepository.
-                readAll()
+                readAll(size,page,sort)
                 .stream()
                 .filter(allNotNullParameterPredicate(tagNames, tagIds, authorName, title, content))
                 .toList();
@@ -101,10 +104,10 @@ public class NewsServiceImpl implements NewsService {
     }
 
     private Predicate<NewsModel> allNotNullParameterPredicate(List<String> tagNames,
-                                                              List<Long> tagIds,
-                                                              String authorName,
-                                                              String title,
-                                                              String content) {
+                                                                              List<Long> tagIds,
+                                                                              String authorName,
+                                                                              String title,
+                                                                              String content) {
         Predicate<NewsModel> newsPredicate = news -> true;
         if (tagNames != null && !tagNames.isEmpty()) newsPredicate = newsPredicate.and(news -> new HashSet<>(news.getTag().stream().map(TagModel::getName).toList()).containsAll(tagNames));
         if (tagIds != null && !tagIds.isEmpty()) newsPredicate = newsPredicate.and(news -> new HashSet<>(news.getTag().stream().map(TagModel::getId).toList()).containsAll(tagIds));
